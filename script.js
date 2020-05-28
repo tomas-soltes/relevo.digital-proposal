@@ -376,4 +376,4 @@ function checkCondition() {
 }
 }
 
-console.log("Did it again");
+alert("Did it again and again");
