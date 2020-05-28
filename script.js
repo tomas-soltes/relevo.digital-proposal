@@ -203,7 +203,7 @@ function checkRadio(e){
      el.dataset.name = "valid";
      objects[e].radio.checked++;
    } 
-   else if(radioChecked.disabled) {
+   else if(el.querySelector('input[type="radio"]').disabled) {
     el.dataset.name = "valid";
   } 
    else {
