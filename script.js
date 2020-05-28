@@ -388,7 +388,10 @@ function checkCondition(button){
 
 function showNextQuestionTextarea(question,nextQuestion){
 question.querySelector('textarea').required = true;
-question.querySelector('label.error').style.opacity = 1;
+let error = document.querySelector('label.error');
+if (error != null){
+    error.style.opacity = 1;
+}
 nextQuestion.style.cursor = "auto";
 nextQuestion.style.opacity = "100";
 nextQuestion.querySelector('textarea').disabled = false;
@@ -396,7 +399,10 @@ nextQuestion.querySelector('textarea').disabled = false;
 
 function hideNextQuestionTextarea(question,nextQuestion){
 question.querySelector('textarea').required = false;
-question.querySelector('label.error').style.opacity = 0;
+let error = document.querySelector('label.error');
+if (error != null){
+    error.style.opacity = 1;
+}
 nextQuestion.style.cursor = "not-allowed";
 nextQuestion.style.opacity = "60%";
 nextQuestion.querySelector('textarea').disabled = true;
