@@ -401,7 +401,7 @@ function hideNextQuestionTextarea(question,nextQuestion){
 question.querySelector('textarea').required = false;
 let error = document.querySelector('label.error');
 if (error != null){
-    error.style.opacity = 1;
+    error.style.opacity = 0;
 }
 nextQuestion.style.cursor = "not-allowed";
 nextQuestion.style.opacity = "60%";
