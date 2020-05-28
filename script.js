@@ -16,6 +16,50 @@ textInputs.forEach((input) => {
   });
 });
 
+
+/************** SUBMIT VALIDATION ************/
+
+let submitBtn = document.querySelector('input[type="submit"]');
+let SubmitBtnFake = document.querySelector('#SubmitBtnFake');
+let invalidQuestion;
+submitBtnInvalid();
+SubmitBtnFake.addEventListener('click',scrollToInvalid);
+
+function checkFormValidation(){
+   invalidQuestion = document.querySelector('[data-name="invalid"]:not([style*="display:none"]):not([style*="display: none"])');
+   if(invalidQuestion !== null) {
+   console.log("Please fill in " + invalidQuestion.closest(".s-p_question").id);
+   submitBtnInvalid();
+   }
+   else{
+   submitBtnValid();
+   }
+}
+
+function scrollToInvalid(){
+   let type = "question";
+   scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
+}
+
+function submitBtnInvalid(){
+   SubmitBtnFake.style.zIndex = "2";
+   submitBtn.disabled = true;
+}
+
+function submitBtnValid(){
+   SubmitBtnFake.style.zIndex = "-1";
+   submitBtn.disabled = false; 
+}
+
+/************** AFTER SUBMIT ************/
+const form = document.querySelector('#Proposal');
+
+form.addEventListener("submit", checkLast);
+
+function checkLast(){
+  objects[objects.length-1].link.classList.add('proposalLinkChecked');
+}
+
 /************** CREATE OBJECTS OF SECTIONS ************/
 
 const sections = [...document.querySelectorAll('.s-p_section')];
@@ -199,7 +243,7 @@ function checkSectionValid(e){
 }
 
 
-/****************** SLIDER **********************/
+/****************** RANGE SLIDER **********************/
 
 $("#P-Range_Products").ionRangeSlider({
     grid: true,
@@ -223,13 +267,13 @@ firstNumber.innerHTML = "< " + firstNumber.textContent;
 
 /****************** TYPE OF WEBSITE - ECOMMERCE OR BUSINESS SECTION **********************/
 
-let ecommerce_website = document.getElementById('P-Website-Ecommerce');
-let ecommerce_section = document.querySelector('.s-p_ecommerce-only');
+const ecommerce_website = document.getElementById('P-Website-Ecommerce');
+const ecommerce_section = document.querySelector('.s-p_ecommerce-only');
 let ecommerce_radio = ecommerce_section.querySelectorAll('.s-p_radio');
 let ecommerce_inputs = ecommerce_section.querySelectorAll('input[type="radio"]');
 
-let business_website = document.getElementById('P-Website-Business');
-let business_section = document.querySelector('.s-p_business-only');
+const business_website = document.getElementById('P-Website-Business');
+const business_section = document.querySelector('.s-p_business-only');
 let business_radio = business_section.querySelectorAll('.s-p_radio');
 let business_inputs = business_section.querySelectorAll('input[type="radio"]');
 
@@ -242,7 +286,6 @@ websiteTypeBtns.forEach((input) => {
    displayRightSectionTimeOut();
   });
 });
-
 
 function displayRightSectionTimeOut(){
 setTimeout(function(){ displayRightSection()}, 100);
@@ -302,7 +345,7 @@ console.log(objects);
 
 
 /************** CONDITION QUESTIONS ************/
-let conditionQuestions = document.querySelectorAll('[data-condition="true"]');
+const conditionQuestions = document.querySelectorAll('[data-condition="true"]');
 
 conditionQuestions.forEach((question) => {
      let buttons = question.querySelectorAll('input[type="radio"]');
@@ -378,47 +421,4 @@ nextButtons.forEach((button) => {
 nextQuestion.style.cursor = "not-allowed";
 nextQuestion.style.opacity = "50%";
 nextQuestion.querySelector('.s-p_radio').dataset.name = "valid";
-}
-
-/************** SUBMIT VALIDATION ************/
-
-let submitBtn = document.querySelector('input[type="submit"]');
-let SubmitBtnFake = document.querySelector('#SubmitBtnFake');
-let invalidQuestion;
-submitBtnInvalid();
-SubmitBtnFake.addEventListener('click',scrollToInvalid);
-
-function checkFormValidation(){
-   invalidQuestion = document.querySelector('[data-name="invalid"]:not([style*="display:none"]):not([style*="display: none"])');
-   if(invalidQuestion !== null) {
-   console.log("Please fill in " + invalidQuestion.closest(".s-p_question").id);
-   submitBtnInvalid();
-   }
-   else{
-   submitBtnValid();
-   }
-}
-
-function scrollToInvalid(){
-   let type = "question";
-   scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
-}
-
-function submitBtnInvalid(){
-   SubmitBtnFake.style.zIndex = "2";
-   submitBtn.disabled = true;
-}
-
-function submitBtnValid(){
-   SubmitBtnFake.style.zIndex = "-1";
-   submitBtn.disabled = false; 
-}
-
-/************** AFTER SUBMIT ************/
-const form = document.querySelector('#Proposal');
-
-form.addEventListener("submit", checkLast);
-
-function checkLast(){
-  objects[objects.length-1].link.classList.add('proposalLinkChecked');
 }
