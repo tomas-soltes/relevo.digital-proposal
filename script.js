@@ -94,6 +94,7 @@ for (let i=0; i<sections.length; i++) {
 
 checkFormValidation()
 
+/*
 function addInvalidToQuestions(i){
     radioInputs.forEach(el => {
       let radioChecked = el.querySelector('input[type="radio"]:checked');
@@ -107,6 +108,7 @@ function addInvalidToQuestions(i){
         el.dataset.name = "invalid"}
     });
 }
+*/
 
 // SCROLL INTO VIEW
 function addListenerToLastQuestion(e){
@@ -201,6 +203,9 @@ function checkRadio(e){
      el.dataset.name = "valid";
      objects[e].radio.checked++;
    } 
+   else if(radioChecked.disabled) {
+    el.dataset.name = "valid";
+  } 
    else {
    el.dataset.name = "invalid"}
    });
