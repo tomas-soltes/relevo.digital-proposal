@@ -375,3 +375,5 @@ function checkCondition() {
     }
 }
 }
+
+console.log("Did it");
