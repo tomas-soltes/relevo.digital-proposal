@@ -1,13 +1,7 @@
-const linksArray = document.querySelectorAll('.c-nav_p_menu_link');
+/************** ADD EVENT LISTENERS TO INTERACTION ************/
 let radioChange = document.querySelectorAll('input[type="radio"]');
 let textInputs = document.querySelector('.s-p_contact').querySelectorAll('input');
-const form = document.querySelector('#Proposal');
 
-form.addEventListener("submit", checkLast);
-
-function checkLast(){
-  objects[objects.length-1].link.classList.add('proposalLinkChecked');
-}
 
 radioChange.forEach((input) => {
   input.addEventListener('change', () => {
@@ -22,42 +16,10 @@ textInputs.forEach((input) => {
   });
 });
 
-
-//SUBMIT
-let submitBtn = document.querySelector('input[type="submit"]');
-let SubmitBtnFake = document.querySelector('#SubmitBtnFake');
-let invalidQuestion;
-submitBtnInvalid();
-SubmitBtnFake.addEventListener('click',scrollToInvalid);
-
-function checkFormValidation(){
-   invalidQuestion = document.querySelector('[data-name="invalid"]:not([style*="display:none"]):not([style*="display: none"])');
-   if(invalidQuestion !== null) {
-   console.log("Please fill in " + invalidQuestion.closest(".s-p_question").id);
-   submitBtnInvalid();
-   }
-   else{
-   submitBtnValid();
-   }
-}
-
-function scrollToInvalid(){
-   let type = "question";
-   scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
-}
-
-function submitBtnInvalid(){
-   SubmitBtnFake.style.zIndex = "2";
-   submitBtn.disabled = true;
-}
-
-function submitBtnValid(){
-   SubmitBtnFake.style.zIndex = "-1";
-   submitBtn.disabled = false; 
-}
-
+/************** CREATE OBJECTS OF SECTIONS ************/
 
 const sections = [...document.querySelectorAll('.s-p_section')];
+const linksArray = document.querySelectorAll('.c-nav_p_menu_link');
 const objects = [];
 let radioInputs, lastQuestion = []; 
 
@@ -236,7 +198,9 @@ function checkSectionValid(e){
   }
 }
 
+
 /****************** SLIDER **********************/
+
 $("#P-Range_Products").ionRangeSlider({
     grid: true,
     min: 10,
@@ -416,4 +380,45 @@ nextQuestion.style.opacity = "50%";
 nextQuestion.querySelector('.s-p_radio').dataset.name = "valid";
 }
 
+/************** SUBMIT VALIDATION ************/
 
+let submitBtn = document.querySelector('input[type="submit"]');
+let SubmitBtnFake = document.querySelector('#SubmitBtnFake');
+let invalidQuestion;
+submitBtnInvalid();
+SubmitBtnFake.addEventListener('click',scrollToInvalid);
+
+function checkFormValidation(){
+   invalidQuestion = document.querySelector('[data-name="invalid"]:not([style*="display:none"]):not([style*="display: none"])');
+   if(invalidQuestion !== null) {
+   console.log("Please fill in " + invalidQuestion.closest(".s-p_question").id);
+   submitBtnInvalid();
+   }
+   else{
+   submitBtnValid();
+   }
+}
+
+function scrollToInvalid(){
+   let type = "question";
+   scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
+}
+
+function submitBtnInvalid(){
+   SubmitBtnFake.style.zIndex = "2";
+   submitBtn.disabled = true;
+}
+
+function submitBtnValid(){
+   SubmitBtnFake.style.zIndex = "-1";
+   submitBtn.disabled = false; 
+}
+
+/************** AFTER SUBMIT ************/
+const form = document.querySelector('#Proposal');
+
+form.addEventListener("submit", checkLast);
+
+function checkLast(){
+  objects[objects.length-1].link.classList.add('proposalLinkChecked');
+}
