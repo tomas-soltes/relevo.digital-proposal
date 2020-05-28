@@ -337,3 +337,81 @@ console.log(objects);
 
 
 
+/************** CONDITION QUESTIONS ************/
+let conditionQuestions = document.querySelectorAll('[data-condition="true"]');
+
+conditionQuestions.forEach((question) => {
+     let buttons = question.querySelectorAll('input[type="radio"]');
+     addListenerToButtons(buttons);
+});
+
+function addListenerToButtons(buttons){
+  buttons.forEach((button) => {
+  setTimeout(function(){ checkCondition(button)}, 300);
+  button.addEventListener('change', () => {
+    checkCondition(button);
+  });
+  });
+}
+
+
+function checkCondition(button){
+  let question = button.closest(".s-p_question");
+  let nextQuestion = question.nextElementSibling;
+  if (question.id == "Q_Existing-Website"){
+    console.log("Existing Website Question");
+    if (button.value == "Yes"){
+    showNextQuestionTextarea(question,nextQuestion);
+    }
+    else{
+    hideNextQuestionTextarea(question,nextQuestion);
+    }
+  }
+  if (question.id == "Q_E_Product-Setup"){
+    console.log("Product Setup Question");
+    let nextButtons = nextQuestion.querySelectorAll('input[type="radio"]');
+    if (button.value == "Yes"){
+    showNextQuestionRadio(question,nextQuestion,nextButtons);
+    }
+    else{
+    hideNextQuestionRadio(question,nextQuestion,nextButtons);
+    }
+}
+}
+
+function showNextQuestionTextarea(question,nextQuestion){
+question.querySelector('textarea').required = true;
+nextQuestion.style.cursor = "auto";
+nextQuestion.style.opacity = "100";
+nextQuestion.querySelector('textarea').disabled = false;
+}
+
+function hideNextQuestionTextarea(question,nextQuestion){
+question.querySelector('textarea').required = false;
+nextQuestion.style.cursor = "not-allowed";
+nextQuestion.style.opacity = "60%";
+nextQuestion.querySelector('textarea').disabled = true;
+}
+
+function showNextQuestionRadio(question,nextQuestion,nextButtons){
+nextButtons.forEach((button) => {
+  button.disabled = false;
+  button.nextElementSibling.style.cursor = "auto";
+});
+nextQuestion.style.cursor = "auto";
+nextQuestion.style.opacity = "100";
+nextQuestion.querySelector('.s-p_radio').dataset.name = "invalid";
+}
+
+function hideNextQuestionRadio(question,nextQuestion,nextButtons){
+nextButtons.forEach((button) => {
+  button.checked = false;
+  button.disabled = true;
+  button.nextElementSibling.style.cursor = "not-allowed";
+});
+nextQuestion.style.cursor = "not-allowed";
+nextQuestion.style.opacity = "50%";
+nextQuestion.querySelector('.s-p_radio').dataset.name = "valid";
+}
+
+
