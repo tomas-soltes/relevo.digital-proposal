@@ -97,7 +97,7 @@ checkFormValidation()
 function addInvalidToQuestions(i){
     radioInputs.forEach(el => {
       let radioChecked = el.querySelector('input[type="radio"]:checked');
-      if(radioChecked !== null) {
+      if((radioChecked !== null) && (el.dataset.affected != true)) {
         el.dataset.name = "valid";
       } 
       else {
