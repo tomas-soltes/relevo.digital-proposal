@@ -367,7 +367,7 @@ function checkCondition(button){
   let nextQuestion = question.nextElementSibling;
   if (question.id == "Q_Existing-Website"){
     console.log("Existing Website Question");
-    if (button.value == "Yes"){
+    if (button.data.answer == "yes"){
     showNextQuestionTextarea(question,nextQuestion);
     }
     else{
@@ -377,7 +377,7 @@ function checkCondition(button){
   if (question.id == "Q_E_Product-Setup"){
     console.log("Product Setup Question");
     let nextButtons = nextQuestion.querySelectorAll('input[type="radio"]');
-    if (button.value == "Yes"){
+    if (button.data.answer == "yes"){
     showNextQuestionRadio(question,nextQuestion,nextButtons);
     }
     else{
