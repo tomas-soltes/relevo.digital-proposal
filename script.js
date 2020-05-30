@@ -22,17 +22,17 @@ textInputs.forEach((input) => {
 let submitBtn = document.querySelector('input[type="submit"]');
 let SubmitBtnFake = document.querySelector('#SubmitBtnFake');
 let invalidQuestion;
-submitBtnInvalid();
+submitBtnDisabled();
 SubmitBtnFake.addEventListener('click',scrollToInvalid);
 
 function checkFormValidation(){
    invalidQuestion = document.querySelector('[data-name="invalid"]:not([style*="display:none"]):not([style*="display: none"])');
    if(invalidQuestion !== null) {
    console.log("Please fill in " + invalidQuestion.closest(".s-p_question").id);
-   submitBtnInvalid();
+   submitBtnDisabled();
    }
    else{
-   submitBtnValid();
+    submitBtnAllowed();
    }
 }
 
@@ -41,19 +41,18 @@ function scrollToInvalid(){
    scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
 }
 
-function submitBtnInvalid(){
+function submitBtnDisabled(){
    SubmitBtnFake.style.zIndex = "2";
    submitBtn.disabled = true;
 }
 
-function submitBtnValid(){
+function submitBtnAllowed(){
    SubmitBtnFake.style.zIndex = "-1";
    submitBtn.disabled = false; 
 }
 
 /************** AFTER SUBMIT ************/
 const form = document.querySelector('#Proposal');
-
 form.addEventListener("submit", checkLast);
 
 function checkLast(){
@@ -94,7 +93,7 @@ for (let i=0; i<sections.length; i++) {
         valid: false,
     };
     addListenerToLastQuestion(i);
-    checkRadio(i);
+    checkRadioInputs(i);
 }
 }
 
@@ -163,7 +162,7 @@ function checkMediaQueries(){
 console.log(objects);
 
 function checkSection(e){
-  checkRadioPresence(e);
+  checkRadioInputsPresence(e);
   checkTextInputPresence(e);
   checkSectionValid(e);
   console.log(objects);
@@ -194,14 +193,14 @@ function checkTextInputs(e){
    })
 }
 
-function checkRadioPresence(e){
+function checkRadioInputsPresence(e){
     if(objects[e].radio.length !== 0) {
     objects[e].radio.valid = false;
-    checkRadio(e); 
+    checkRadioInputs(e); 
     }
 }
 
-function checkRadio(e){
+function checkRadioInputs(e){
   objects[e].radio.checked = 0;
   objects[e].radio.content.forEach(el => {
    let radioChecked = el.querySelector('input[type="radio"]:checked');
@@ -211,6 +210,7 @@ function checkRadio(e){
    } 
    else if(el.querySelector('input[type="radio"]').disabled) {
     el.dataset.name = "valid";
+    objects[e].radio.checked++;
   } 
    else {
    el.dataset.name = "invalid"}
@@ -277,21 +277,21 @@ const business_section = document.querySelector('.s-p_business-only');
 let business_radio = business_section.querySelectorAll('.s-p_radio');
 let business_inputs = business_section.querySelectorAll('input[type="radio"]');
 
-displayRightSectionTimeOut();
+typeOfWebsiteTimeOut();
 
 const websiteTypeBtns = document.querySelectorAll('input[name="P-Website"]');
 console.log(websiteTypeBtns);
 websiteTypeBtns.forEach((input) => {
   input.addEventListener('change', () => {
-   displayRightSectionTimeOut();
+    typeOfWebsiteTimeOut();
   });
 });
 
-function displayRightSectionTimeOut(){
-setTimeout(function(){ displayRightSection()}, 100);
+function typeOfWebsiteTimeOut(){
+setTimeout(function(){ typeOfWebsite()}, 100);
 }
 
-function displayRightSection(){
+function typeOfWebsite(){
 if (ecommerce_website.checked){
 ecommerce_section.style.display = "block";
 business_section.style.display = "none";
@@ -337,7 +337,8 @@ business_radio.forEach((radio) => {
 
 }
 delete objects[2].radio.content;
-createObjects();
+radioInputs = [...sections[2].querySelectorAll('.s-p_radio:not([style*="display:none"]):not([style*="display: none"])')];;
+objects[2].radio.content = radioInputs;
 checkSection(2);
 console.log(objects);
 }
