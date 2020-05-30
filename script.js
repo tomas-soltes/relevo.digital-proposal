@@ -337,8 +337,7 @@ business_radio.forEach((radio) => {
 
 }
 delete objects[2].radio.content;
-radioInputs = [...sections[2].querySelectorAll('.s-p_radio:not([style*="display:none"]):not([style*="display: none"])')];;
-objects[2].radio.content = radioInputs;
+createObjects();
 checkSection(2);
 console.log(objects);
 }
