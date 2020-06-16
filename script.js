@@ -37,6 +37,7 @@ function checkFormValidation(){
 }
 
 function scrollToInvalid(){
+   checkFormValidation();
    let type = "question";
    scrollIntoID(invalidQuestion.closest(".s-p_question").id,type);
 }
