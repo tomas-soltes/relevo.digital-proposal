@@ -355,10 +355,11 @@ conditionQuestions.forEach((question) => {
 
 function addListenerToButtons(buttons){
   buttons.forEach((button) => {
-  setTimeout(function(){ checkCondition(button)}, 300);
+  checkCondition(button);
+  /* setTimeout(function(){ checkCondition(button)}, 300);
   button.addEventListener('change', () => {
     checkCondition(button);
-  });
+  });*/
   });
 }
 
