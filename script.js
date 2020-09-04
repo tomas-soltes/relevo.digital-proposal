@@ -343,6 +343,22 @@ function addListenerToButtons(buttons){
 function checkCondition(button){
   let question = button.closest(".s-p_question");
   let nextQuestion = question.nextElementSibling;
+  if (question.id == "Q_Deadline"){
+    if (button.dataset.answer == "yes"){
+    question.querySelector('textarea').required = true;
+let error = document.querySelector('label.error');
+if (error != null){
+    error.style.opacity = 1;
+}
+    }
+    else{
+    question.querySelector('textarea').required = false;
+let error = document.querySelector('label.error');
+if (error != null){
+    error.style.opacity = 0;
+}
+    }
+  }
   if (question.id == "Q_Existing-Website"){
     console.log("Existing Website Question");
     if (button.dataset.answer == "yes"){
