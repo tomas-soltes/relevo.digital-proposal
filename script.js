@@ -405,7 +405,7 @@ nextQuestion.querySelector('textarea').disabled = true;
 function showNextQuestionRadio(question,nextQuestion,nextButtons){
 nextButtons.forEach((button) => {
   button.disabled = false;
-  button.nextElementSibling.style.cursor = "auto";
+  button.nextElementSibling.style.cursor = "pointer";
 });
 nextQuestion.style.cursor = "auto";
 nextQuestion.style.opacity = "100";
