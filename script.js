@@ -243,29 +243,6 @@ function checkSectionValid(e){
   }
 }
 
-
-/****************** RANGE SLIDER **********************/
-
-$("#P-Range_Products").ionRangeSlider({
-    grid: true,
-    min: 10,
-    max: 250,
-    from_min: 10,
-    from: 10,
-    prefix: "± ",
-    postfix: "",
-    hide_min_max: true,
-    force_edges: true,
-    step: 10,
-    grid_num: 6,
-});
-let lastNumber = document.querySelector('.js-grid-text-6');
-lastNumber.innerHTML = lastNumber.textContent + "+";
-
-let firstNumber = document.querySelector('.js-grid-text-0');
-firstNumber.innerHTML = "< " + firstNumber.textContent;
-
-
 /****************** TYPE OF WEBSITE - ECOMMERCE OR BUSINESS SECTION **********************/
 
 const ecommerce_website = document.getElementById('P-Website-Ecommerce');
